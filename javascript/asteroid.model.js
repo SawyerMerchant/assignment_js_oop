@@ -30,9 +30,9 @@ model.getSize = function(size) {
 
 model.Asteroid = function(size){
   model.Moveable.call(this);
-  this.moveableType = "asteroid";
-  var aSize = model.getSize(size);
-  view.renderAsteroid(this.xCoord, this.yCoord, aSize);
+  // this.moveableType = "asteroid";
+  this.size = model.getSize(size);
+  view.renderObject(this);
 };
 model.Asteroid.prototype = Object.create(model.Moveable.prototype);
 model.Asteroid.prototype.constructor = model.Asteroid;

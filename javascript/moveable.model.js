@@ -23,7 +23,7 @@ model.Moveable = function(speed, location) {
 model.Moveable.prototype.tic = function() {
   this.xCoord += this.xVel;
   this.yCoord -= this.yVel;
-  // model.rerender(this);
+  view.renderObject(this);
   //for benchmarking
   console.log("moved to " +this.xCoord + " " + this.yCoord);
 };
@@ -31,7 +31,6 @@ model.Moveable.prototype.tic = function() {
 // model.rerender = function(which) {
 //   case which.moveableType
 // };
-
 
 
 model.benchmark = function(iterations) {

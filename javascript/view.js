@@ -12,8 +12,11 @@ view.board = $('#board');
 view.board.attr('width', model.canvas.width)
           .attr('height', model.canvas.height);
 
-view.renderAsteroid = function(x, y, size) {
-  var b_canvas = document.getElementById("board");//view.board;//$('#board');
-  var b_context = b_canvas.getContext("2d");
-  b_context.fillRect(x, y, 20, 25);
+view.renderObject = function(obj) {
+  var boardCanvas = document.getElementById("board");//view.board;//$('#board');
+  var boardContext = boardCanvas.getContext("2d");
+  var img = new Image();
+  img.src = 'images/Asteroid.png';
+  boardContext.drawImage(img, obj.xCoord, obj.yCoord, 75, 75);
+  // boardContext.fillRect(obj.xCoord, obj.yCoord, 20, 25); // drawing rectangle
 };
