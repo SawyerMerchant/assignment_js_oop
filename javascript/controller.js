@@ -16,11 +16,14 @@ controller.initialize = function() {
 
 
 controller.startGame = function() {
+  // TODO make array of asteroids and tic each
   var mover = new model.Asteroid();
+  var ship = new model.Ship();
   var game = setInterval(function() {
     // $('#board').attr('width', model.canvas.width);
     view.resetCanvas();
     mover.tic();
+    // ship.tic();
     // if (model.gameOver()) {
     //   // view.declareGameOver();
     //   clearInterval(game);

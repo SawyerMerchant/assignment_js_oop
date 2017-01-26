@@ -10,6 +10,8 @@ model.Ship = function() {
 model.Ship.prototype = Object.create(model.Moveable.prototype);
 model.Ship.prototype.constructor = model.Ship;
 
+
+
 model.Ship.rotate = function() {
 
 };

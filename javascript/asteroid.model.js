@@ -18,6 +18,8 @@ model.Asteroid = function(size){
   // this.moveableType = "asteroid";
   this.width = canvas.width / model.sizeDenominator.large;
   model.asteroidList.push(this);
+  this.img = new Image();
+  this.img.src = 'images/Asteroid.png';
   view.renderObject(this);
 };
 model.Asteroid.prototype = Object.create(model.Moveable.prototype);
@@ -29,6 +31,5 @@ model.makeCoordinate = function(edge) {
 model.makeSpeed = function() {
   var maxSpeed = (model.canvas.height / 10);
   var minSpeed = maxSpeed * -1;
-  // return Math.floor(Math.random() * (model.canvas.height / 10));
   return minSpeed + Math.floor(Math.random() * (maxSpeed - minSpeed));
 };
