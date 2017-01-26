@@ -1,37 +1,23 @@
 var Asteroids = Asteroids || {};
 Asteroids.model = Asteroids.model || {};
 var model = Asteroids.model;
+model.asteroidList = [];
 
 
 // does not work - Asteroid does not inherit tic
 // Object.setPrototypeOf( model.Asteroid, model.Moveable.prototype);
 
-model.SIZE = {
-  small:  (model.canvas.width / 100),
-  medium: (model.canvas.width / 50),
-  large:  (model.canvas.width / 25)
-};
-
-model.getSize = function(size) {
-  var asteroidSize;
-  switch(size) {
-    case "small":
-      asteroidSize = model.SIZE.small;
-      break;
-    case "medium":
-      asteroidSize = model.SIZE.medium;
-      break;
-    case "large":
-      asteroidSize = model.SIZE.large;
-      break;
-  }
-  return asteroidSize;
+model.sizeDenominator = {
+  small:  100,
+  medium: 50,
+  large:  25
 };
 
 model.Asteroid = function(size){
   model.Moveable.call(this);
   // this.moveableType = "asteroid";
-  this.size = model.getSize(size);
+  this.width = canvas.width / model.sizeDenominator.large;
+  model.asteroidList.push(this);
   view.renderObject(this);
 };
 model.Asteroid.prototype = Object.create(model.Moveable.prototype);
@@ -41,5 +27,8 @@ model.makeCoordinate = function(edge) {
   return Math.floor(Math.random() * edge);
 };
 model.makeSpeed = function() {
-  return Math.floor(Math.random() * (model.canvas.height / 10));
+  var maxSpeed = (model.canvas.height / 10);
+  var minSpeed = maxSpeed * -1;
+  // return Math.floor(Math.random() * (model.canvas.height / 10));
+  return minSpeed + Math.floor(Math.random() * (maxSpeed - minSpeed));
 };

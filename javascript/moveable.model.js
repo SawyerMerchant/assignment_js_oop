@@ -21,8 +21,21 @@ model.Moveable = function(speed, location) {
 };
 
 model.Moveable.prototype.tic = function() {
-  this.xCoord += this.xVel;
-  this.yCoord -= this.yVel;
+  var newXcoord = (this.xCoord + this.xVel) % model.canvas.width;
+  var newYcoord = (this.yCoord + this.yVel) % model.canvas.height;
+  if (newXcoord < 0) {
+    this.xCoord = model.canvas.width - newXcoord;
+  } else {
+    this.xCoord = newXcoord;
+  }
+  if (newYcoord < 0) {
+    this.yCoord = model.canvas.height - newYcoord;
+  } else {
+    this.yCoord = newYcoord;
+  }
+
+  // this.xCoord = (this.xCoord + this.xVel) % model.canvas.width;
+  // this.yCoord = (this.yCoord + this.yVel) % model.canvas.height;
   view.renderObject(this);
   //for benchmarking
   console.log("moved to " +this.xCoord + " " + this.yCoord);
@@ -36,7 +49,7 @@ model.Moveable.prototype.tic = function() {
 model.benchmark = function(iterations) {
   var startBuild = new Date();
   for (var i = 0; i < iterations; i++) {
-    new model.Asteroid();
+    // new model.Asteroid();
   }
   var endBuild = new Date();
   var buildTime = endBuild - startBuild;
@@ -53,6 +66,11 @@ model.benchmark = function(iterations) {
   console.log("One asteroid moved " + iterations + "times in " + moveTime + " milliseconds");
 };
 
+model.moveTest = function(moving) {
+  for (var h = 0; h < iterations; h++) {
+    moving.tic();
+  }
+};
 
 // model.benchmark(1000);
 // console.log(new model.Asteroid().tic);

@@ -4,5 +4,10 @@ var model = Asteroids.model;
 // does not work - Asteroid does not inherit tic
 // Object.setPrototypeOf( model.Asteroid, model.Moveable.prototype);
 model.canvas = {};
-model.canvas.height = 800;
-model.canvas.width = 1000;
+model.canvas.height = $(window).height() - 100;
+model.canvas.width = $(window).width() - 100;
+
+model.canvas.init = function() {
+  model.canvas.height = $(window).height() - 100;
+  model.canvas.width = $(window).width() - 100;
+};
