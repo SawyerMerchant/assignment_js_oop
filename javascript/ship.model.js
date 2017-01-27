@@ -11,8 +11,9 @@ model.Ship = function(speed) {
   this.xCoord = model.canvas.width / 2;
   this.yCoord = model.canvas.height / 2;
   this.img = new Image();
-  this.heading = 0;
+  this.heading = 1;
   this.img.src = 'images/shiprest.png';
+  this.size = model.canvas.width / 75;
 };
 model.Ship.prototype = Object.create(model.Moveable.prototype);
 model.Ship.prototype.constructor = model.Ship;
