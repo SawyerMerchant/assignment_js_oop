@@ -33,17 +33,10 @@ model.Moveable.prototype.tic = function() {
   } else {
     this.yCoord = newYcoord;
   }
-
-  // this.xCoord = (this.xCoord + this.xVel) % model.canvas.width;
-  // this.yCoord = (this.yCoord + this.yVel) % model.canvas.height;
   view.renderObject(this);
   //for benchmarking
   console.log("moved to " +this.xCoord + " " + this.yCoord);
 };
-
-// model.rerender = function(which) {
-//   case which.moveableType
-// };
 
 
 model.benchmark = function(iterations) {

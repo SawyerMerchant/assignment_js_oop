@@ -1,6 +1,6 @@
 var Asteroids = Asteroids || {};
 var controller = Asteroids.controller = {};
-
+controller.ship = new model.Ship(model.shipStartSpeed);
 
 controller.initialize = function() {
   // view.initialize();
@@ -17,9 +17,14 @@ controller.initialize = function() {
 
 controller.startGame = function() {
   model.generateAsteroids(5);
+  // TODO make array of asteroids and tic each
+  var mover = new model.Asteroid();
+  // var ship = new model.Ship(model.shipStartSpeed);
   var game = setInterval(function() {
     view.resetCanvas();
     model.ticAsteroids();
+    controller.ship.tic();
+
     // if (model.gameOver()) {
     //   // view.declareGameOver();
     //   clearInterval(game);
@@ -36,3 +41,4 @@ $(document).ready( function() {
 
 // TODO
 // Preven new asteroids from generating on top of ship
+// Make object sizes a product of screen size

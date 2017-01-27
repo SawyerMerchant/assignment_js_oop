@@ -16,8 +16,11 @@ model.sizeDenominator = {
 model.Asteroid = function(size){
   model.Moveable.call(this);
   // this.moveableType = "asteroid";
-  this.width = canvas.width / model.sizeDenominator.large;
-  view.renderObject(this);
+  this.width = model.canvas.width / model.sizeDenominator.large;
+  //TODO refactor to make size above tranlate to large bellow
+  this.width = model.canvas.width / model.sizeDenominator.large;
+  this.img = new Image();
+  this.img.src = 'images/Asteroid.png';
 };
 model.Asteroid.prototype = Object.create(model.Moveable.prototype);
 model.Asteroid.prototype.constructor = model.Asteroid;
@@ -28,7 +31,6 @@ model.makeCoordinate = function(edge) {
 model.makeSpeed = function() {
   var maxSpeed = (model.canvas.height / 10);
   var minSpeed = maxSpeed * -1;
-  // return Math.floor(Math.random() * (model.canvas.height / 10));
   return minSpeed + Math.floor(Math.random() * (maxSpeed - minSpeed));
 };
 
