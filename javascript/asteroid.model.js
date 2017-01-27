@@ -16,7 +16,7 @@ model.sizeDenominator = {
 model.Asteroid = function(size){
   model.Moveable.call(this);
   //TODO refactor to make size above tranlate to large bellow
-  this.width = canvas.width / model.sizeDenominator.large;
+  this.width = model.canvas.width / model.sizeDenominator.large;
   model.asteroidList.push(this);
   this.img = new Image();
   this.img.src = 'images/Asteroid.png';

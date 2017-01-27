@@ -18,9 +18,9 @@ model.Ship.prototype = Object.create(model.Moveable.prototype);
 model.Ship.prototype.constructor = model.Ship;
 
 
-
+var TO_RADIANS = Math.PI/180;
 model.Ship.rotate = function() {
-
+  context.save();
 };
 
 model.Ship.thrust = function() {
