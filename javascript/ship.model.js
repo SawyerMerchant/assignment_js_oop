@@ -20,9 +20,14 @@ model.Ship.prototype.constructor = model.Ship;
 
 var TO_RADIANS = Math.PI/180;
 model.Ship.rotate = function() {
-  context.save();
+  model.context.save();
+  model.context.translate(controller.ship.xCoord, controller.ship.yCoord);
+  model.context.rotate(30 * TO_RADIANS);
+  var img = controller.ship.img;
+  model.context.drawImage(img, -(img.width/2), -(img.height/2));
+  model.context.restore();
 };
 
 model.Ship.thrust = function() {
-
+  
 };
