@@ -17,7 +17,6 @@ model.Asteroid = function(size){
   model.Moveable.call(this);
   // this.moveableType = "asteroid";
   this.width = canvas.width / model.sizeDenominator.large;
-  model.asteroidList.push(this);
   view.renderObject(this);
 };
 model.Asteroid.prototype = Object.create(model.Moveable.prototype);
@@ -31,4 +30,17 @@ model.makeSpeed = function() {
   var minSpeed = maxSpeed * -1;
   // return Math.floor(Math.random() * (model.canvas.height / 10));
   return minSpeed + Math.floor(Math.random() * (maxSpeed - minSpeed));
+};
+
+model.generateAsteroids = function(num) {
+  // var newAsteroid;
+  for (var a = 0; a < num; a++) {
+    model.asteroidList.push(new model.Asteroid());
+  }
+};
+
+model.ticAsteroids = function() {
+  for (var rock = 0; rock < model.asteroidList.length; rock++) {
+    model.asteroidList[rock].tic();
+  }
 };

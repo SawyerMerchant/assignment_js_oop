@@ -16,11 +16,10 @@ controller.initialize = function() {
 
 
 controller.startGame = function() {
-  var mover = new model.Asteroid();
+  model.generateAsteroids(5);
   var game = setInterval(function() {
-    // $('#board').attr('width', model.canvas.width);
     view.resetCanvas();
-    mover.tic();
+    model.ticAsteroids();
     // if (model.gameOver()) {
     //   // view.declareGameOver();
     //   clearInterval(game);
