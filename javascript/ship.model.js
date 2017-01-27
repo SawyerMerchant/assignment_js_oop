@@ -11,23 +11,27 @@ model.Ship = function(speed) {
   this.xCoord = model.canvas.width / 2;
   this.yCoord = model.canvas.height / 2;
   this.img = new Image();
+  this.heading = 0;
   this.img.src = 'images/shiprest.png';
-  view.renderObject(this);
 };
 model.Ship.prototype = Object.create(model.Moveable.prototype);
 model.Ship.prototype.constructor = model.Ship;
 
+model.Ship.rotateHeading = function(degrees) {
+  controller.ship.heading += degrees;
+};
+
 
 var TO_RADIANS = Math.PI/180;
-model.Ship.rotate = function() {
+model.Ship.rotateImage = function(obj) {
   model.context.save();
   model.context.translate(controller.ship.xCoord, controller.ship.yCoord);
-  model.context.rotate(30 * TO_RADIANS);
+  model.context.rotate(controller.ship.heading * TO_RADIANS);
   var img = controller.ship.img;
   model.context.drawImage(img, -(img.width/2), -(img.height/2));
   model.context.restore();
 };
 
 model.Ship.thrust = function() {
-  
+
 };

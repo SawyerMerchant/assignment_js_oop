@@ -11,8 +11,11 @@ view.init = function() {
 
 view.renderObject = function(obj) {
   // TODO make size dynamic
+  if (obj.heading) {
+    model.Ship.rotateImage(obj);
+  } else {
   model.context.drawImage(obj.img, obj.xCoord, obj.yCoord, 75, 75);
-  // model.context.fillRect(obj.xCoord, obj.yCoord, 20, 25); // drawing rectangle
+  }
 };
 
 view.resetCanvas = function() {
@@ -20,18 +23,19 @@ view.resetCanvas = function() {
 };
 
 $(document).keydown(function(e) {
-    switch(e.which) {
-        case 37: // left
-          model.Ship.rotate();
-        break;
+  switch(e.which) {
+    case 37: // left
+      model.Ship.rotateHeading(-15);
+    break;
 
-        case 38: // up
-        break;
+    case 38: // up
+    break;
 
-        case 39: // right
-        break;
+    case 39: // right
+      model.Ship.rotateHeading(15);
+    break;
 
-        default: return; // exit this handler for other keys
-    }
-    e.preventDefault(); // prevent the default action (scroll / move caret)
+    default: return; // exit this handler for other keys
+  }
+  e.preventDefault(); // prevent the default action (scroll / move caret)
 });
