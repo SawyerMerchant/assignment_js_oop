@@ -29,6 +29,7 @@ $(document).keydown(function(e) {
     break;
 
     case 38: // up
+      controller.ship.thrust(1);
     break;
 
     case 39: // right

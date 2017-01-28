@@ -10,6 +10,7 @@ model.Ship = function(speed) {
   var self = this;
   var TO_RADIANS = Math.PI/180;
   model.Moveable.call(this, speed);
+  this.acceleration = 1.5;
   this.xCoord = model.canvas.width / 2;
   this.yCoord = model.canvas.height / 2;
   this.img = new Image();
@@ -31,7 +32,10 @@ model.Ship = function(speed) {
   };
 
   this.thrust = function() {
-
+    var xThrust = Math.sin(this.heading * TO_RADIANS);
+    var yThrust = -Math.cos(this.heading * TO_RADIANS);
+    this.xVel += xThrust * this.acceleration;
+    this.yVel += yThrust * this.acceleration;
   };
 
   this.fire = function() {
