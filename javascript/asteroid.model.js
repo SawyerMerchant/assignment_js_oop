@@ -17,14 +17,37 @@ model.Asteroid = function(size){
   model.Moveable.call(this);
   // this.moveableType = "asteroid";
   this.width = model.canvas.width / model.sizeDenominator.large;
-  //TODO refactor to make size above tranlate to large bellow
-  this.width = model.canvas.width / model.sizeDenominator.large;
   this.img = new Image();
   this.img.src = 'images/Asteroid.png';
+
+  this.checkCrash = function(obj) {
+    var render = true;
+
+    // check for collision
+    checkCrashWithShip(obj);
+    // if collision with ship, end game - save for last for debugging
+
+    // if collision with bullet, split, render pieces, destroy bullet
+
+
+    return render;
+  };
+
+  var checkCrashWithShip = function(obj) {
+    // assuming the coords are in the center of images
+    var xDistance = Math.abs(obj.xCoord - controller.ship.xCoord);
+    var yDistance = Math.abs(obj.yCoord - controller.ship.yCoord);
+    var size = obj.width / 2;
+    console.log('xdistance = ' + xDistance + ' yDistance = ' + yDistance + ' size = ' + size);
+    if (xDistance < size && yDistance < size) {
+      console.error('Crash');
+    }
+  };
 };
 model.Asteroid.prototype = Object.create(model.Moveable.prototype);
 model.Asteroid.prototype.constructor = model.Asteroid;
 
+// TODO make a class method
 model.makeCoordinate = function(edge) {
   return Math.floor(Math.random() * edge);
 };

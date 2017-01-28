@@ -33,10 +33,19 @@ model.Moveable.prototype.tic = function() {
   } else {
     this.yCoord = newYcoord;
   }
-  view.renderObject(this);
+
+  var render = true;
+  if (this.checkCrash) {
+    render = this.checkCrash(this);
+  }
+  if (render) {
+    view.renderObject(this);
+  }
+
   //for benchmarking
   console.log("moved to " +this.xCoord + " " + this.yCoord);
 };
+
 
 
 model.benchmark = function(iterations) {

@@ -7,6 +7,8 @@ model.shipStartSpeed.yVel = 0;
 
 
 model.Ship = function(speed) {
+  var self = this;
+  var TO_RADIANS = Math.PI/180;
   model.Moveable.call(this, speed);
   this.xCoord = model.canvas.width / 2;
   this.yCoord = model.canvas.height / 2;
@@ -14,25 +16,27 @@ model.Ship = function(speed) {
   this.heading = 1;
   this.img.src = 'images/shiprest.png';
   this.size = model.canvas.width / 75;
+
+  this.rotateHeading = function(degrees) {
+    self.heading += degrees;
+  };
+
+  this.rotateImage = function() {
+    model.context.save();
+    model.context.translate(self.xCoord, self.yCoord);
+    model.context.rotate(self.heading * TO_RADIANS);
+    var img = self.img;
+    model.context.drawImage(img, -(img.width/2), -(img.height/2));
+    model.context.restore();
+  };
+
+  this.thrust = function() {
+
+  };
+
+  this.fire = function() {
+
+  };
 };
 model.Ship.prototype = Object.create(model.Moveable.prototype);
 model.Ship.prototype.constructor = model.Ship;
-
-model.Ship.rotateHeading = function(degrees) {
-  controller.ship.heading += degrees;
-};
-
-
-var TO_RADIANS = Math.PI/180;
-model.Ship.rotateImage = function(obj) {
-  model.context.save();
-  model.context.translate(controller.ship.xCoord, controller.ship.yCoord);
-  model.context.rotate(controller.ship.heading * TO_RADIANS);
-  var img = controller.ship.img;
-  model.context.drawImage(img, -(img.width/2), -(img.height/2));
-  model.context.restore();
-};
-
-model.Ship.thrust = function() {
-
-};
