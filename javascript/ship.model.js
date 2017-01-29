@@ -39,7 +39,14 @@ model.Ship = function(speed) {
   };
 
   this.fire = function() {
-
+    var bulletStartSpeed = {};
+    bulletStartSpeed.xVel = (this.xVel) * 10;
+    bulletStartSpeed.yVel = (this.yVel) * 10;
+    var bulletStartLocation = {};
+    bulletStartLocation.x = this.xCoord;
+    bulletStartLocation.y = this.yCoord;
+    var bullet = new model.Bullet(bulletStartSpeed, bulletStartLocation);
+    model.bulletList.push(bullet);
   };
 };
 model.Ship.prototype = Object.create(model.Moveable.prototype);

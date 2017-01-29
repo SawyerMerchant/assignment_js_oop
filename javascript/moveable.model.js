@@ -10,6 +10,7 @@ model.Moveable = function(speed, location) {
     this.xCoord = model.makeCoordinate(model.canvas.width);
     this.yCoord = model.makeCoordinate(model.canvas.height);
   }
+
   console.log("Created " + this.xCoord + " " + this.yCoord);
   if (speed) {
     this.xVel = speed.xVel;
@@ -40,6 +41,10 @@ model.Moveable.prototype.tic = function() {
   }
   if (render) {
     view.renderObject(this);
+  }
+
+  if (this.halfLife) {
+    this.checkHalfLife();
   }
 
   //for benchmarking

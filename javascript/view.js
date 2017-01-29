@@ -36,6 +36,10 @@ $(document).keydown(function(e) {
       controller.ship.rotateHeading(15);
     break;
 
+    case 32: // spacebar
+      controller.ship.fire();
+    break;
+
     default: return; // exit this handler for other keys
   }
   e.preventDefault(); // prevent the default action (scroll / move caret)

@@ -23,6 +23,7 @@ controller.startGame = function() {
   var game = setInterval(function() {
     view.resetCanvas();
     model.ticAsteroids();
+    model.ticBullets();
     controller.ship.tic();
 
     // if (model.gameOver()) {
