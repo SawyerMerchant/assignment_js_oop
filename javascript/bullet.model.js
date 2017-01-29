@@ -29,8 +29,8 @@ model.Bullet = function() {
 
   this.checkHalfLife = function() {
     self.halfLife -= 1;
-    if (self.halfLife < 1) {
-      model.bulletList.splice(self.listPosition, 1);
+    if (self.halfLife < 2) {
+      model.bulletList.shift();
     }
   };
 

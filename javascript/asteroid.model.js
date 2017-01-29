@@ -24,11 +24,10 @@ model.Asteroid = function(size){
     var render = true;
 
     // check for collision
-    checkCrashWithShip(obj);
     // if collision with ship, end game - save for last for debugging
-
+    checkCrashWithShip(obj);
     // if collision with bullet, split, render pieces, destroy bullet
-
+    checkCrashWithBulletList(obj);
 
     return render;
   };
@@ -40,9 +39,26 @@ model.Asteroid = function(size){
     var size = obj.width / 2;
     console.log('xdistance = ' + xDistance + ' yDistance = ' + yDistance + ' size = ' + size);
     if (xDistance < size && yDistance < size) {
-      console.error('Crash');
+      console.error('Ship Crash');
     }
   };
+
+  var checkCrashWithBulletList = function(obj) {
+    for (var bl = 0; bl < model.bulletList.length; bl++) {
+      checkCrashWithBullet(obj, model.bulletList[bl]);
+    }
+  };
+
+  var checkCrashWithBullet = function(obj, bullet) {
+    var xDistance = Math.abs(obj.xCoord - bullet.xCoord);
+    var yDistance = Math.abs(obj.yCoord - bullet.yCoord);
+    var size = obj.width / 2;
+    console.log('xdistance = ' + xDistance + ' yDistance = ' + yDistance + ' size = ' + size);
+    if (xDistance < size && yDistance < size) {
+      console.error('Bullet Crash');
+    }
+  };
+
 };
 model.Asteroid.prototype = Object.create(model.Moveable.prototype);
 model.Asteroid.prototype.constructor = model.Asteroid;
