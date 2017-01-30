@@ -14,7 +14,7 @@ view.renderObject = function(obj) {
   if (obj.rotateImage) {
     obj.rotateImage();
   } else {
-    model.context.drawImage(obj.img, obj.xCoord, obj.yCoord, 75, 75);
+    model.context.drawImage(obj.img, obj.xCoord, obj.yCoord, obj.width, obj.width);
   }
 };
 

@@ -16,7 +16,7 @@ controller.initialize = function() {
 
 
 controller.startGame = function() {
-  model.generateAsteroids(5);
+  model.generateAsteroids(5, 'large');
   // TODO make array of asteroids and tic each
   var mover = new model.Asteroid();
   // var ship = new model.Ship(model.shipStartSpeed);

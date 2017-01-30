@@ -7,18 +7,32 @@ model.asteroidList = [];
 // does not work - Asteroid does not inherit tic
 // Object.setPrototypeOf( model.Asteroid, model.Moveable.prototype);
 
-model.sizeDenominator = {
-  small:  100,
-  medium: 50,
-  large:  25
+model.sizeDenominator = function(size) {
+  var returnSize;
+  switch (size) {
+    case "small":
+      returnSize = 45;
+      break;
+    case "medium":
+      returnSize = 35;
+      break;
+    default:
+      returnSize = 25;
+  }
+  return returnSize;
 };
 
-model.Asteroid = function(size){
-  model.Moveable.call(this);
+model.Asteroid = function(size, location){
+  var self = this;
+  model.Moveable.call(this, null, location);
   // this.moveableType = "asteroid";
-  this.width = model.canvas.width / model.sizeDenominator.large;
+  this.width = model.canvas.width / model.sizeDenominator(size);
   this.img = new Image();
   this.img.src = 'images/Asteroid.png';
+  this.size = size;
+  this.location = {};
+  this.location.x = this.xCoord;
+  this.location.y = this.yCoord;
 
   this.checkCrash = function(obj) {
     var render = true;
@@ -37,9 +51,11 @@ model.Asteroid = function(size){
     var xDistance = Math.abs(obj.xCoord - controller.ship.xCoord);
     var yDistance = Math.abs(obj.yCoord - controller.ship.yCoord);
     var size = obj.width / 2;
-    console.log('xdistance = ' + xDistance + ' yDistance = ' + yDistance + ' size = ' + size);
-    if (xDistance < size && yDistance < size) {
-      console.error('Ship Crash');
+    // console.log('xdistance = ' + xDistance + ' yDistance = ' + yDistance + ' size = ' + size);
+    var shipHeight = controller.ship.img.height;
+    var shipWidth = controller.ship.img.width;
+    if (xDistance < size + shipWidth && yDistance < size + shipHeight) {
+      // console.error('Ship Crash');
     }
   };
 
@@ -50,12 +66,34 @@ model.Asteroid = function(size){
   };
 
   var checkCrashWithBullet = function(obj, bullet) {
+    var shouldRender = true;
     var xDistance = Math.abs(obj.xCoord - bullet.xCoord);
     var yDistance = Math.abs(obj.yCoord - bullet.yCoord);
     var size = obj.width / 2;
     console.log('xdistance = ' + xDistance + ' yDistance = ' + yDistance + ' size = ' + size);
-    if (xDistance < size && yDistance < size) {
+    if (xDistance < size + 30 && yDistance < size + 30) {
       console.error('Bullet Crash');
+      shouldRender = false;
+      executeCrashWithBullet(obj, bullet);
+    }
+    return shouldRender;
+  };
+
+  var executeCrashWithBullet = function(rock, bullet) {
+    var bulletIndex = model.bulletList.indexOf(bullet);
+    var rockIndex = model.asteroidList.indexOf(rock);
+    model.bulletList.splice(bulletIndex, 1);
+    model.asteroidList.splice(rockIndex, 1);
+    if (rock.size === "medium" || rock.size === "large") {
+      makeSmallerAsteroids(rock);
+    }
+  };
+
+  var makeSmallerAsteroids = function(rock) {
+    if (rock.size === "large") {
+      model.generateAsteroids(2, "medium", rock.location);
+    } else if (rock.size === "medium") {
+      model.generateAsteroids(2, "small", rock.location);
     }
   };
 
@@ -73,10 +111,10 @@ model.makeSpeed = function() {
   return minSpeed + Math.floor(Math.random() * (maxSpeed - minSpeed));
 };
 
-model.generateAsteroids = function(num) {
+model.generateAsteroids = function(num, size, location) {
   // var newAsteroid;
   for (var a = 0; a < num; a++) {
-    model.asteroidList.push(new model.Asteroid());
+    model.asteroidList.push(new model.Asteroid(size, location));
   }
 };
 

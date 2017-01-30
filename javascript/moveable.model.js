@@ -48,7 +48,7 @@ model.Moveable.prototype.tic = function() {
   }
 
   //for benchmarking
-  console.log("moved to " +this.xCoord + " " + this.yCoord);
+  // console.log("moved to " +this.xCoord + " " + this.yCoord);
 };
 
 
