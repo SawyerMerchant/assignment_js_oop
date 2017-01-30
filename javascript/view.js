@@ -7,6 +7,8 @@ var view = Asteroids.view;
 view.init = function() {
   model.board.attr('width', model.canvas.width)
             .attr('height', model.canvas.height);
+  $('#start').hide('slow');
+  $('#end').hide('slow');
 };
 
 view.renderObject = function(obj) {
@@ -44,3 +46,7 @@ $(document).keydown(function(e) {
   }
   e.preventDefault(); // prevent the default action (scroll / move caret)
 });
+
+view.declareGameOver = function() {
+  $('#end').show('slow');
+};

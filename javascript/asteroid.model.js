@@ -39,7 +39,9 @@ model.Asteroid = function(size, location){
 
     // check for collision
     // if collision with ship, end game - save for last for debugging
-    checkCrashWithShip(obj);
+    if ( checkCrashWithShip(obj) ) {
+      model.gameOver = true;
+    }
     // if collision with bullet, split, render pieces, destroy bullet
     checkCrashWithBulletList(obj);
 
@@ -47,16 +49,19 @@ model.Asteroid = function(size, location){
   };
 
   var checkCrashWithShip = function(obj) {
-    // assuming the coords are in the center of images
+    var hitShip = false;
+    // coords are in the center of images
     var xDistance = Math.abs(obj.xCoord - controller.ship.xCoord);
     var yDistance = Math.abs(obj.yCoord - controller.ship.yCoord);
     var size = obj.width / 2;
     // console.log('xdistance = ' + xDistance + ' yDistance = ' + yDistance + ' size = ' + size);
     var shipHeight = controller.ship.img.height;
     var shipWidth = controller.ship.img.width;
-    if (xDistance < size + shipWidth && yDistance < size + shipHeight) {
-      // console.error('Ship Crash');
+    if (xDistance < size && yDistance < size ) {
+      hitShip = true;
+      console.error('Ship Crash');
     }
+    return hitShip;
   };
 
   var checkCrashWithBulletList = function(obj) {

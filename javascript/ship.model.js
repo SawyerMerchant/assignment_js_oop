@@ -4,6 +4,7 @@ var model = Asteroids.model;
 model.shipStartSpeed = {};
 model.shipStartSpeed.xVel = 0;
 model.shipStartSpeed.yVel = 0;
+model.gameOver = false;
 
 
 model.Ship = function(speed) {
