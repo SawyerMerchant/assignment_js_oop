@@ -16,7 +16,7 @@ model.Ship = function(speed) {
   this.yCoord = model.canvas.height / 2;
   this.img = new Image();
   this.heading = 1;
-  this.img.src = 'images/shiprest.png';
+  this.img.src = '/SawyerMerchant/project_game_center_browser/master/images/shiprest.png';
   this.size = model.canvas.width / 75;
 
   this.rotateHeading = function(degrees) {

@@ -16,7 +16,7 @@ model.Bullet = function() {
   this.yVel = -Math.cos(this.heading * TO_RADIANS) * 40;
   // view.renderObject(this);
   this.img = new Image();
-  this.img.src = 'images/bullet.png';
+  this.img.src = '/SawyerMerchant/project_game_center_browser/master/images/bullet.png';
 
   this.rotateImage = function() {
     model.context.save();
