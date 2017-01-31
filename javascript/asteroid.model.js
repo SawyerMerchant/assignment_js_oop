@@ -75,9 +75,9 @@ model.Asteroid = function(size, location){
     var xDistance = Math.abs(obj.xCoord - bullet.xCoord);
     var yDistance = Math.abs(obj.yCoord - bullet.yCoord);
     var size = obj.width / 2;
-    console.log('xdistance = ' + xDistance + ' yDistance = ' + yDistance + ' size = ' + size);
-    if (xDistance < size + 30 && yDistance < size + 30) {
-      console.error('Bullet Crash');
+    // console.log('xdistance = ' + xDistance + ' yDistance = ' + yDistance + ' size = ' + size);
+    if (xDistance < size + 35 && yDistance < size + 35) {
+      // console.error('Bullet Crash');
       shouldRender = false;
       executeCrashWithBullet(obj, bullet);
     }
@@ -106,7 +106,6 @@ model.Asteroid = function(size, location){
 model.Asteroid.prototype = Object.create(model.Moveable.prototype);
 model.Asteroid.prototype.constructor = model.Asteroid;
 
-// TODO make a class method
 model.makeCoordinate = function(edge) {
   return Math.floor(Math.random() * edge);
 };

@@ -7,7 +7,7 @@ model.Bullet = function() {
   model.Moveable.call(this);
   var TO_RADIANS = Math.PI/180;
   var self = this;
-  this.halfLife = 10;
+  this.halfLife = 15;
   this.listPosition = model.bulletList.length;
   this.xCoord = controller.ship.xCoord;
   this.yCoord = controller.ship.yCoord;
